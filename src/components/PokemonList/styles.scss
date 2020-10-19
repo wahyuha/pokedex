@@ -1,0 +1,23 @@
+@import 'scss/variables';
+
+.container {
+  width: 960px;
+  margin: 0 auto;
+}
+
+.listWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.pokemonItem {
+  text-align: center;
+  width: 20%;
+  margin: 0 16px;
+}
+
+.pokemonImg {
+  width: 50%;
+}

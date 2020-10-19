@@ -1,22 +1,19 @@
-import Head from 'next/head'
-import styles from '@components/main.scss'
+import App from '@components/App'
+import PokemonList from '@components/PokemonList'
 
-export default function Home() {
+const ListPage = ({ pokemons }) => {
   return (
-    <>
-      <style jsx>{styles}</style>
-      <div className="container">
-        <Head>
-          <title>Pokedex</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-
-        <main className="main">
-          <h1 className="title">
-            Welcome to Pokedex
-          </h1>
-        </main>
-      </div>
-    </>
-  )
+    <App>
+      <PokemonList pokemons={pokemons} />
+    </App>
+  );
 }
+
+ListPage.getInitialProps = async ({ isServer }) => {
+  const result = await fetch('https://pokeapi.co/api/v2/pokemon/');
+  const pokemons = await result.json()
+
+  return { pokemons };
+};
+
+export default ListPage;
