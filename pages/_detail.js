@@ -1,10 +1,8 @@
 import Head from 'next/head'
-import styles from '@components/main.scss'
 
 export default function Home() {
   return (
     <>
-      <style jsx>{styles}</style>
       <div className="container">
         <Head>
           <title>Pokedex</title>

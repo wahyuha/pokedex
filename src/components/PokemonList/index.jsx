@@ -1,5 +1,9 @@
 import { useState } from 'react'
-import _ from 'lodash'
+
+import InfiniteScroll from 'react-infinite-scroller';
+import Skeleton from 'react-loading-skeleton';
+
+import Link from 'next/link'
 import Head from 'next/head'
 import styles from './styles.scss'
 
@@ -10,9 +14,30 @@ const PokemonItem = (item) => {
   return (
     <>
       <style jsx>{styles}</style>
-      <div className="pokemonItem">
-        <img src={imageSrc} alt={item.name} className="pokemonImg" />
-        <h2>{item.name}</h2>
+      <Link 
+        href={`/detail/?pokemonSlug=${item.name}`} 
+        as={`/${item.name}`}>
+        <div className="pokemonItem">
+          <img src={imageSrc} alt={item.name} className="pokemonImg" />
+          <h2>{item.name}</h2>
+        </div>
+      </Link>
+    </>
+  )
+}
+
+const LoadingSkeleton = () => {
+  return (
+    <>
+      <style jsx>{styles}</style>
+      <div className="listWrapper">
+        {[0, 1, 2, 3, 4, 6].map(item => {
+          return (
+            <div className="pokemonItem loaderSkeleton">
+              <Skeleton width="100%" height="160px" />
+            </div>
+          )
+        })}
       </div>
     </>
   )
@@ -21,6 +46,12 @@ const PokemonItem = (item) => {
 export default function PokemonList({ pokemons }) {
   const [pokemonList, setPokemonList] = useState(pokemons)
   const { results, next } = pokemonList
+
+  const _fetchMore = async () => {
+    const result = await fetch(next);
+    const morePokemons = await result.json()
+    setPokemonList({ ...morePokemons, results: [...results, ...morePokemons.results] })
+  }
 
   return (
     <>
@@ -32,9 +63,17 @@ export default function PokemonList({ pokemons }) {
         </Head>
 
         <div className="main">
-          <div className="listWrapper">
-            {results.map(item => <PokemonItem {...item} />)}
-          </div>
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={_fetchMore}
+            hasMore={Boolean(next)}
+            threshold={0}
+            loader={<LoadingSkeleton />}
+          >
+            <div className="listWrapper">
+              {results.map(item => <PokemonItem {...item} />)}
+            </div>
+          </InfiniteScroll>
         </div>
       </div>
     </>
