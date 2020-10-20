@@ -1,0 +1,20 @@
+@import 'scss/variables';
+
+.loaderSkeleton {
+  margin: 16px;
+}
+
+.listWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.pokemonItem {
+  color: $color-grey;
+  text-decoration: none;
+  text-align: center;
+  width: 20%;
+  margin: 0 16px;
+}
