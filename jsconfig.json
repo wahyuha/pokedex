@@ -5,7 +5,11 @@
       "@components": ["src/components"],
       "@components/*": ["src/components/*"],
       "@pages": ["pages"],
-      "@pages/*": ["pages/*"]
+      "@pages/*": ["pages/*"],
+      "@config": ["config"],
+      "@config/*": ["config/*"],
+      "@utils": ["utils"],
+      "@utils/*": ["utils/*"],
     }
   }
 }

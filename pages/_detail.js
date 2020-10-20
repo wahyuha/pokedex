@@ -1,9 +1,10 @@
 import App from '@components/App'
+import PokemonDetail from '@components/PokemonDetail'
 
 const ListPage = ({ detail }) => {
   return (
     <App>
-      <div>Detail pokemon {detail.name}</div>
+      <PokemonDetail detail={detail} />
     </App>
   );
 }

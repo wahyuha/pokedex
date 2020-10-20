@@ -4,7 +4,6 @@ import InfiniteScroll from 'react-infinite-scroller';
 import Skeleton from 'react-loading-skeleton';
 
 import Link from 'next/link'
-import Head from 'next/head'
 import styles from './styles.scss'
 
 const PokemonItem = (item) => {
@@ -57,11 +56,6 @@ export default function PokemonList({ pokemons }) {
     <>
       <style jsx>{styles}</style>
       <div className="container">
-        <Head>
-          <title>Pokedex</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-
         <div className="main">
           <InfiniteScroll
             pageStart={0}

@@ -8,7 +8,9 @@
       {
         "alias": {
           "@pages": "./pages",
-          "@components": "./src/components"
+          "@components": "./src/components",
+          "@configs": "./src/configs",
+          "@utils": "./src/utils",
         }
       }
     ]

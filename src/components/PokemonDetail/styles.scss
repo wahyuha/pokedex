@@ -1,0 +1,83 @@
+@import 'scss/_variables';
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.card {
+  max-width: 600px;
+  margin: 5rem auto;
+  background-color: $color-white;
+}
+
+.pokTitle {
+  background-color: rgb(187, 151, 7);
+  color: $color-white;
+  text-align: center;
+  padding: 8px;
+  text-transform: capitalize;
+  font-weight: normal;
+}
+
+.panel {
+  padding: 16px;
+}
+
+.subTitle {
+  background-color: rgb(187, 151, 7);
+  color: $color-white;
+  text-align: center;
+  padding: 8px;
+  text-transform: capitalize;
+  font-weight: normal;
+}
+
+.stat {
+  display: flex;
+}
+
+.cover {
+  width: 140px;
+}
+
+.statInfo {
+  padding-left: 20px;
+  width: 100%;
+}
+
+.typeWrapper {
+  margin-bottom: 16px;
+}
+
+.statType {
+  display: inline-block;
+  padding: 8px 12px;
+  color: $color-white;
+  margin-right: 8px;
+  text-transform: uppercase;
+}
+
+.statChart {
+  display: flex;
+  align-items: center;
+  margin: 4px 0;
+}
+
+.statText {
+  width: 140px;
+}
+
+.chartBar {
+  width: 100%;
+}
+
+.chartBarFilled {
+  padding: 4px;
+  color: $color-white;
+  margin-left: 4px;
+}
+
+.profileInfo {
+  padding: 4px 0;
+}
