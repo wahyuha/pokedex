@@ -15,12 +15,12 @@ const PokemonItem = (item) => {
     <>
       <style jsx>{styles}</style>
       <Link 
-        href={`/detail/?pokemonSlug=${item.name}`} 
+        href={`/_detail?pokemonSlug=${item.name}`} 
         as={`/${item.name}`}>
-        <div className="pokemonItem">
+        <a className="pokemonItem">
           <img src={imageSrc} alt={item.name} className="pokemonImg" />
           <h2>{item.name}</h2>
-        </div>
+        </a>
       </Link>
     </>
   )
@@ -31,7 +31,7 @@ const LoadingSkeleton = () => {
     <>
       <style jsx>{styles}</style>
       <div className="listWrapper">
-        {[0, 1, 2, 3, 4, 6].map(item => {
+        {[0, 1, 2, 3].map(item => {
           return (
             <div className="pokemonItem loaderSkeleton">
               <Skeleton width="100%" height="160px" />
