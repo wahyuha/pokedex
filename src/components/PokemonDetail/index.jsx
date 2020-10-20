@@ -15,7 +15,10 @@ export default function PokemonDetail({ detail }) {
       <>
         <style jsx>{styles}</style>
         <div className="typeWrapper">
-          {types.map(value => <div className="statType" style={{ backgroundColor: generateColorByType(value.type.name) }}>{value.type.name}</div>)}
+          {types.map(value => {
+            const typeName = value.type.name
+            return <div key={`tp-${typeName}`} className="statType" style={{ backgroundColor: generateColorByType(typeName) }}>{typeName}</div>
+          })}
         </div>
       </>
     )
@@ -25,14 +28,17 @@ export default function PokemonDetail({ detail }) {
     return (
       <>
         <style jsx>{styles}</style>
-        {stats.map(value => (
-          <div className="statChart">
-            <div className="statText">{value.stat.name}</div>
-              <div className="chartBar">
-                <div className="chartBarFilled" style={{ backgroundColor: colorType, width: `${value.base_stat}%` }}>{value.base_stat}</div>
-              </div>
-          </div>
-        ))}
+        {stats.map(value => {
+          const statName = value.stat.name
+          return (
+            <div className="statChart" key={`st-${statName}`}>
+              <div className="statText">{statName}</div>
+                <div className="chartBar">
+                  <div className="chartBarFilled" style={{ backgroundColor: colorType, width: `${value.base_stat}%` }}>{value.base_stat}</div>
+                </div>
+            </div>
+          )
+        })}
       </>
     )
   }

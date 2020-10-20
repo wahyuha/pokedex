@@ -8,7 +8,7 @@ export default function LoadingSkeleton () {
       <div className="listWrapper">
         {[0, 1, 2, 3].map(item => {
           return (
-            <div className="pokemonItem loaderSkeleton">
+            <div className="pokemonItem loaderSkeleton" key={`skt-${item}`}>
               <Skeleton width="100%" height="240px" />
             </div>
           )

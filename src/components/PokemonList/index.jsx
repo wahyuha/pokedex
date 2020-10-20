@@ -30,7 +30,7 @@ export default function PokemonList({ pokemons }) {
             loader={<LoadingSkeleton />}
           >
             <div className="pokemonContainer">
-              {results.map(item => <ListDetail {...item} />)}
+              {results.map(item => <ListDetail key={`itm-${item.name}`} {...item} />)}
             </div>
           </InfiniteScroll>
         </div>
