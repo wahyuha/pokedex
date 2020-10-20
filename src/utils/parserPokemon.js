@@ -35,8 +35,13 @@ function generateColorByType(types) {
   return colors[types]
 }
 
+function injectResetTypes(results) {
+  return [{ name: 'all', url: 'https://pokeapi.co/api/v2/pokemon/' }, ...results]
+}
+
 module.exports = {
   parseCover,
   parseAbilities,
-  generateColorByType
+  generateColorByType,
+  injectResetTypes
 }

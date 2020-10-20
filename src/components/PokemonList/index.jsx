@@ -2,13 +2,15 @@ import { useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroller';
 
 import { parseFromTypes } from '@utils/model'
+import { generateColorByType } from '@utils/parserPokemon'
 
 import LoadingSkeleton from './LoadingSkeleton'
 import ListDetail from './Item'
 
 import styles from './styles.scss'
 
-const renderLoader = () => {
+const renderLoader = (isLoading) => {
+  if (!isLoading) return null
   return (
     <>
       <style jsx>{styles}</style>
@@ -24,6 +26,7 @@ const renderLoader = () => {
 export default function PokemonList({ pokemons, types }) {
   const [isLoading, setLoading] = useState(false)
   const [pokemonList, setPokemonList] = useState(pokemons)
+  const [selectedType, setType] = useState('all')
   const { results, next } = pokemonList
 
   const _fetchMore = async () => {
@@ -33,37 +36,49 @@ export default function PokemonList({ pokemons, types }) {
     setPokemonList({ ...morePokemons, results: [...results, ...morePokemons.results] })
   }
 
-  const _filterPokemons = async (typeUrl) => {
+  const _filterPokemons = async ({ typeUrl, typeName }) => {
+    setType(typeName)
     setLoading(true)
     const result = await fetch(typeUrl);
     const filtered = await result.json()
-    setPokemonList(parseFromTypes(filtered))
+    setPokemonList(parseFromTypes(filtered, typeName))
     setLoading(false)
   }
 
-  const renderFilter = () => {
+  const renderFilterOptions = (types) => {
     return (
       <>
         <style jsx>{styles}</style>
-        <div className="filterWrap">
-          <select onChange={e => _filterPokemons(e.target.value)}>
-            {types.map(value => <option value={value.url}>{value.name}</option>)}
-          </select>
+        <div className="filterScroll">
+          <div className="tabWrapper">
+            {types.map(value => (
+              <div
+                onClick={() => _filterPokemons({ typeUrl: value.url, typeName: value.name })}
+                className={`tabItem ${selectedType === value.name ? 'tabSelected' : ''}`}
+                style={{ backgroundColor: generateColorByType(value.name) }}
+                key={`tp-${value.name}`}
+              >
+              <img src="images/pokeball.png" alt="Electric" />
+              <h3>{value.name}</h3>
+            </div>
+            ))}
+          </div>
         </div>
       </>
     )
-  }
-
-  if (isLoading) {
-    return renderLoader()
   }
 
   return (
     <>
       <style jsx>{styles}</style>
       <div className="container">
-        {renderFilter()}
+        <div className="landingBoard">
+          <img src="images/pokemon.png" alt="Pokedex" />
+          <h2>Choose your hero</h2>
+        </div>
+        {renderFilterOptions(types)}
         <div className="main">
+          {renderLoader(isLoading)}
           <InfiniteScroll
             pageStart={0}
             loadMore={_fetchMore}

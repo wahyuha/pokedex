@@ -1,8 +1,17 @@
 @import 'scss/variables';
 
 .container {
-  max-width: 920px;
+  max-width: 900px;
   margin: 0 auto;
+}
+
+.landingBoard {
+  text-align: center;
+
+  img {
+    width: 30%;
+    @media (max-width: 440px) { width: 45%; }
+  }
 }
 
 .pokemonImg {
@@ -17,10 +26,44 @@
   align-items: center;
 }
 
-.filterWrap {
-  text-align: center;
-}
-
 .loadWrapper {
   width: 100%;
+}
+
+
+
+.filterScroll {
+  display: flex;
+  overflow-x: auto;
+}
+
+.tabWrapper {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.tabItem {
+  width: 80px;
+  text-align: center;
+  margin: 4px;
+  border-radius: 20px;
+  overflow: hidden;
+
+  img {
+    width: 60%;
+    margin: 4px;
+  }
+
+  h3 {
+    background-color: rgba(0, 0, 0, .5);
+    margin: 0;
+    color: $color-white;
+    padding: 4px 4px 8px;
+    font-size: 1rem;
+    text-transform: capitalize;
+  }
+}
+
+.tabSelected {
+  border: solid 8px $color-red;
 }

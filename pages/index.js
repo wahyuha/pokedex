@@ -1,3 +1,5 @@
+import { injectResetTypes } from '@utils/parserPokemon'
+
 import App from '@components/App'
 import PokemonList from '@components/PokemonList'
 
@@ -16,7 +18,7 @@ ListPage.getInitialProps = async () => {
   const resultTypes = await fetch('https://pokeapi.co/api/v2/type/');
   const types = await resultTypes.json()
 
-  return { pokemons, types: types.results };
+  return { pokemons, types: injectResetTypes(types.results) };
 };
 
 export default ListPage;
