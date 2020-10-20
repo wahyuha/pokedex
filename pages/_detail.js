@@ -1,20 +1,19 @@
-import Head from 'next/head'
+import App from '@components/App'
 
-export default function Home() {
+const ListPage = ({ detail }) => {
   return (
-    <>
-      <div className="container">
-        <Head>
-          <title>Pokedex</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-
-        <main className="main">
-          <h1 className="title">
-            Halaman detail pokemon
-          </h1>
-        </main>
-      </div>
-    </>
-  )
+    <App>
+      <div>Detail pokemon {detail.name}</div>
+    </App>
+  );
 }
+
+ListPage.getInitialProps = async ({ query }) => {
+  const { pokemonSlug } = query
+  const result = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonSlug}`);
+  const detail = await result.json()
+
+  return { detail };
+};
+
+export default ListPage;
