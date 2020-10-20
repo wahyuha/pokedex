@@ -1,19 +1,22 @@
 import App from '@components/App'
 import PokemonList from '@components/PokemonList'
 
-const ListPage = ({ pokemons }) => {
+const ListPage = ({ pokemons, types }) => {
   return (
     <App>
-      <PokemonList pokemons={pokemons} />
+      <PokemonList pokemons={pokemons} types={types} />
     </App>
   );
 }
 
-ListPage.getInitialProps = async ({ isServer }) => {
+ListPage.getInitialProps = async () => {
   const result = await fetch('https://pokeapi.co/api/v2/pokemon/');
   const pokemons = await result.json()
 
-  return { pokemons };
+  const resultTypes = await fetch('https://pokeapi.co/api/v2/type/');
+  const types = await resultTypes.json()
+
+  return { pokemons, types: types.results };
 };
 
 export default ListPage;
