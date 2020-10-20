@@ -16,5 +16,9 @@
   text-decoration: none;
   text-align: center;
   width: 20%;
-  margin: 0 16px;
+  margin: 16px;
+
+  @media (max-width: 440px) {
+    width: 38%;
+  }
 }
